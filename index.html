@@ -6,67 +6,85 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>TaskWiz – Academic Task Manager</h1>
+  <div class="container">
+    <h1>TaskWiz – Academic Task Manager</h1>
 
-  <!-- Add Task Form -->
-  <section id="task-form-section">
-    <h2>Add New Task</h2>
-    <form id="task-form">
-      <label>Title:
-        <input type="text" id="title" required>
-      </label>
+    <!-- Summary boxes -->
+    <section id="summary-section">
+      <div class="summary-card">
+        <span class="summary-label">Total Tasks</span>
+        <span id="summary-total" class="summary-value">0</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-label">High Priority (score ≥ 10)</span>
+        <span id="summary-high" class="summary-value">0</span>
+      </div>
+      <div class="summary-card">
+        <span class="summary-label">Total Hours</span>
+        <span id="summary-hours" class="summary-value">0</span>
+      </div>
+    </section>
 
-      <label>Deadline:
-        <input type="date" id="deadline" required>
-      </label>
+    <!-- Add Task Form -->
+    <section id="task-form-section">
+      <h2>Add New Task</h2>
+      <form id="task-form">
+        <label>Title
+          <input type="text" id="title" required>
+        </label>
 
-      <label>Estimated Hours:
-        <input type="number" id="hours" min="1" value="1" required>
-      </label>
+        <label>Deadline
+          <input type="date" id="deadline" required>
+        </label>
 
-      <label>Difficulty (1–5):
-        <input type="number" id="difficulty" min="1" max="5" value="3" required>
-      </label>
+        <label>Estimated Hours
+          <input type="number" id="hours" min="1" value="1" required>
+        </label>
 
-      <label>Category:
-        <select id="category">
-          <option>Assignment</option>
-          <option>Exam</option>
-          <option>Project</option>
-          <option>Reading</option>
-        </select>
-      </label>
+        <label>Difficulty (1–5)
+          <input type="number" id="difficulty" min="1" max="5" value="3" required>
+        </label>
 
-      <button type="submit">Add Task</button>
-    </form>
-  </section>
+        <label>Category
+          <select id="category">
+            <option>Assignment</option>
+            <option>Exam</option>
+            <option>Project</option>
+            <option>Reading</option>
+          </select>
+        </label>
 
-  <!-- Controls -->
-  <section id="controls">
-    <button id="prioritize-btn">Prioritize Tasks (AI)</button>
-    <button id="clear-btn">Clear All Tasks</button>
-  </section>
+        <button type="submit" class="primary-btn">Add Task</button>
+      </form>
+    </section>
 
-  <!-- Task List -->
-  <section id="task-list-section">
-    <h2>Current Tasks</h2>
-    <table id="task-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Deadline</th>
-          <th>Hours</th>
-          <th>Difficulty</th>
-          <th>Category</th>
-          <th>Priority Score</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- rows created by JavaScript -->
-      </tbody>
-    </table>
-  </section>
+    <!-- Controls -->
+    <section id="controls">
+      <button id="prioritize-btn" class="secondary-btn">Prioritize Tasks (AI)</button>
+      <button id="clear-btn" class="secondary-btn warn">Clear All Tasks</button>
+    </section>
+
+    <!-- Task List -->
+    <section id="task-list-section">
+      <h2>Current Tasks</h2>
+      <table id="task-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Deadline</th>
+            <th>Hours</th>
+            <th>Difficulty</th>
+            <th>Category</th>
+            <th>Priority Score</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- rows created by JavaScript -->
+        </tbody>
+      </table>
+    </section>
+  </div>
 
   <script src="script.js"></script>
 </body>

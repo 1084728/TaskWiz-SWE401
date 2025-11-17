@@ -6,18 +6,34 @@ const taskTableBody = document.querySelector("#task-table tbody");
 const prioritizeBtn = document.getElementById("prioritize-btn");
 const clearBtn = document.getElementById("clear-btn");
 
+// Summary elements
+const summaryTotal = document.getElementById("summary-total");
+const summaryHigh = document.getElementById("summary-high");
+const summaryHours = document.getElementById("summary-hours");
+
 // Load tasks from localStorage on page load
 window.addEventListener("load", () => {
   const stored = localStorage.getItem("taskwiz_tasks");
   if (stored) {
     tasks = JSON.parse(stored);
-    renderTasks();
   }
+  renderTasks();
 });
 
 // Save tasks to localStorage
 function saveTasks() {
   localStorage.setItem("taskwiz_tasks", JSON.stringify(tasks));
+}
+
+// Update summary boxes
+function updateSummary() {
+  const total = tasks.length;
+  const totalHours = tasks.reduce((sum, t) => sum + (t.hours || 0), 0);
+  const highPriorityCount = tasks.filter(t => (t.priority || 0) >= 10).length;
+
+  summaryTotal.textContent = total;
+  summaryHours.textContent = totalHours;
+  summaryHigh.textContent = highPriorityCount;
 }
 
 // Handle Add Task form submit
@@ -51,14 +67,14 @@ taskForm.addEventListener("submit", (e) => {
   taskForm.reset();
 });
 
-// Simple "AI" priority scoring function
+// Simple "AI-style" priority scoring function
 function calculatePriority(task) {
   const today = new Date();
   const due = new Date(task.deadline);
   const msPerDay = 1000 * 60 * 60 * 24;
   const daysLeft = Math.max(1, Math.round((due - today) / msPerDay));
 
-  // near deadline -> higher score
+  // Near deadline -> higher score
   const deadlineScore = 10 / daysLeft;
   const difficultyScore = task.difficulty * 2;
   const effortScore = task.hours;
@@ -108,6 +124,8 @@ function renderTasks() {
 
     taskTableBody.appendChild(tr);
   });
+
+  updateSummary();
 }
 
 // make deleteTask visible to HTML onclick
